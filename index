@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Video Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #video-container, #error-message {
+            display: none;
+        }
+        #password-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Protection -->
+    <div id="password-container">
+        <h2>Enter Password to Access Video</h2>
+        <input type="password" id="password" placeholder="Enter password">
+        <button onclick="verifyPassword()">Submit</button>
+        <p id="error-message" style="color: red;">Incorrect password. Please try again.</p>
+    </div>
+
+    <!-- Video Player -->
+    <div id="video-container">
+        <h2>Select Video Quality</h2>
+        <select id="video-quality" onchange="changeVideo()">
+            <option value="https://mega.nz/embed/K5szlKRD#dxHLS3-I7f98YJn46K-XQXXc3fWKbBoJhYS129EHFic">360p</option>
+            <option value="https://mega.nz/embed/X1TyuXRD#hdks9I7YHJn48K-XXXjchWFbBuJhYEHFkc">480p</option>
+            <option value="https://mega.nz/embed/Z1AzqKRD#jhye34HJn46K-ERREchXXXcbFWfbBjHKFSK">720p</option>
+            <option value="https://mega.nz/embed/W2BxvKRD#mdkls8HJn46F-KYXCTWcbBlkkKS127EHFjc">1080p</option>
+        </select>
+        <iframe id="video-frame" width="640" height="360" frameborder="0" 
+                src="https://mega.nz/embed/K5szlKRD#dxHLS3-I7f98YJn46K-XQXXc3fWKbBoJhYS129EHFic" 
+                allowfullscreen>
+        </iframe>
+    </div>
+
+    <script>
+        const PASSWORD = "THEEDGE"; // Set your password here
+
+        function verifyPassword() {
+            const enteredPassword = document.getElementById("password").value;
+            const errorMessage = document.getElementById("error-message");
+            const passwordContainer = document.getElementById("password-container");
+            const videoContainer = document.getElementById("video-container");
+
+            if (enteredPassword === PASSWORD) {
+                passwordContainer.style.display = "none";
+                videoContainer.style.display = "block";
+            } else {
+                errorMessage.style.display = "block";
+            }
+        }
+
+        function changeVideo() {
+            const videoFrame = document.getElementById("video-frame");
+            const selectedQuality = document.getElementById("video-quality").value;
+            videoFrame.src = selectedQuality;
+        }
+    </script>
+</body>
+</html>
